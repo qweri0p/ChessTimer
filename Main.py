@@ -13,25 +13,10 @@ minute0=15
 minute1=15
 second0=00
 second1=00
+
 player0counter = 0
 player1counter = 0
-
-def DrawTimer(minute0, second0, minute1, second1):
-    if second0 == 0:
-        extra0 = 0
-    else:
-        extra0 = ""
-    if second1 == 0:
-        extra1 = 0
-    else:
-        extra1 = ""
-    val0 = f'{str(minute0)}:{str(second0)}{extra0}'
-    val1 = f'{str(minute1)}:{str(second1)}{extra1}'
-    temp0 = font.render(str(val0), True, BLACK)
-    temp1 = font.render(str(val1), True, BLACK) 
-    screen.blit(temp0, (100, 350))
-    screen.blit(temp1, (1100, 350))                            
-
+                           
 done = False
 while not done:
     for event in pg.event.get():
@@ -86,7 +71,36 @@ while not done:
 
 
     screen.fill(WHITE)
-    DrawTimer(minute0, second0, minute1, second1)
+
+
+
+    if second0 == 0:
+        extra0 = 0
+        extras0 = ""
+    elif second0 < 10:
+        extras0 = 0
+    else:
+        extra0 = ""
+        extras0 = ""
+    if second1 == 0:
+        extra1 = 0
+        extras1 = ""
+    elif second1 < 10:
+        extras1 = 0
+    else:
+        extra1 = ""
+        extras1 = ""
+
+        
+    val0 = f'{str(minute0)}:{str(extras0)}{str(second0)}{extra0}'
+    val1 = f'{str(minute1)}:{str(extras1)}{str(second1)}{extra1}'
+    temp0 = font.render(str(val0), True, BLACK)
+    temp1 = font.render(str(val1), True, BLACK) 
+    screen.blit(temp0, (100, 350))
+    screen.blit(temp1, (1100, 350)) 
+
+
+
     pg.display.flip()
     pg.display.update()
     clock.tick(60)
