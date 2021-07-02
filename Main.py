@@ -1,5 +1,6 @@
 import pygame as pg
 import time
+SetTime = 10
 pg.init()
 size = (1500, 700)
 screen = pg.display.set_mode(size)
@@ -9,15 +10,14 @@ clock = pg.time.Clock()
 font = pg.font.Font('font.ttf', 128)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
-minute0=15
-minute1=15
+minute0=SetTime
+minute1=SetTime
 second0=00
 second1=00
 
 player0counter = 0
 player1counter = 0
-                           
-done = False
+done = False                  
 while not done:
     for event in pg.event.get():
         if event.type == pg.QUIT:
