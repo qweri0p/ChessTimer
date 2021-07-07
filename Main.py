@@ -10,10 +10,14 @@ clock = pg.time.Clock()
 font = pg.font.SysFont('Consolas', 256)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+bg = WHITE
 minute0=SetTime
 minute1=SetTime
 second0=00
 second1=00
+minutes = 69
+seconds = 69
 
 player0counter = 0
 player1counter = 0
@@ -48,19 +52,23 @@ while not done:
     if player0counter == 60:
         player0counter =0
         if seconds == 0:
-            minutes-=1
-            seconds = 59
+            if minutes == 0 and activePlayer != 2:
+                bg = RED
+            else:
+                minutes-=1
+                seconds = 59
         else:
             seconds-=1
     elif player1counter == 60:
         player1counter =0
         if seconds == 0:
-            minutes-=1
-            seconds = 59
+            if minutes == 0 and activePlayer != 2:
+                bg = RED
+            else:
+                minutes-=1
+                seconds = 59
         else:
             seconds-=1
-    
-    
     if activePlayer == 0:
         minute0 = minutes
         second0 = seconds
@@ -70,7 +78,7 @@ while not done:
 
 
 
-    screen.fill(WHITE)
+    screen.fill(bg)
 
 
 
