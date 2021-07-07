@@ -99,6 +99,11 @@ while not done:
         extra1 = ""
         extras1 = ""
 
+
+    if activePlayer == 0:
+        pg.draw.circle(screen, RED, (360, 300), (50))
+    elif activePlayer == 1:
+        pg.draw.circle(screen, RED, (1145, 300), (50))
         
     val0 = f'{str(minute0)}:{str(extras0)}{str(second0)}{extra0}'
     val1 = f'{str(minute1)}:{str(extras1)}{str(second1)}{extra1}'
