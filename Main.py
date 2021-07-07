@@ -7,7 +7,7 @@ screen = pg.display.set_mode(size)
 pg.display.set_caption('Timer')
 activePlayer = 2       
 clock = pg.time.Clock()
-font = pg.font.Font('font.ttf', 128)
+font = pg.font.SysFont('Consolas', 256)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 minute0=SetTime
@@ -96,8 +96,8 @@ while not done:
     val1 = f'{str(minute1)}:{str(extras1)}{str(second1)}{extra1}'
     temp0 = font.render(str(val0), True, BLACK)
     temp1 = font.render(str(val1), True, BLACK) 
-    screen.blit(temp0, (100, 350))
-    screen.blit(temp1, (1100, 350)) 
+    screen.blit(temp0, (15, 450))
+    screen.blit(temp1, (800, 450)) 
 
 
 
