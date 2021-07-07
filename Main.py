@@ -1,38 +1,27 @@
 import pygame as pg
 import time
+SetTime = 10
 pg.init()
 size = (1500, 700)
 screen = pg.display.set_mode(size)
 pg.display.set_caption('Timer')
 activePlayer = 2       
 clock = pg.time.Clock()
-font = pg.font.Font('font.ttf', 128)
+font = pg.font.SysFont('Consolas', 256)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
-minute0=15
-minute1=15
+RED = (255, 0, 0)
+bg = WHITE
+minute0=SetTime
+minute1=SetTime
 second0=00
 second1=00
+minutes = 69
+seconds = 69
+
 player0counter = 0
 player1counter = 0
-
-def DrawTimer(minute0, second0, minute1, second1):
-    if second0 == 0:
-        extra0 = 0
-    else:
-        extra0 = ""
-    if second1 == 0:
-        extra1 = 0
-    else:
-        extra1 = ""
-    val0 = f'{str(minute0)}:{str(second0)}{extra0}'
-    val1 = f'{str(minute1)}:{str(second1)}{extra1}'
-    temp0 = font.render(str(val0), True, BLACK)
-    temp1 = font.render(str(val1), True, BLACK) 
-    screen.blit(temp0, (100, 350))
-    screen.blit(temp1, (1100, 350))                            
-
-done = False
+done = False                  
 while not done:
     for event in pg.event.get():
         if event.type == pg.QUIT:
@@ -63,19 +52,23 @@ while not done:
     if player0counter == 60:
         player0counter =0
         if seconds == 0:
-            minutes-=1
-            seconds = 59
+            if minutes == 0 and activePlayer != 2:
+                bg = RED
+            else:
+                minutes-=1
+                seconds = 59
         else:
             seconds-=1
     elif player1counter == 60:
         player1counter =0
         if seconds == 0:
-            minutes-=1
-            seconds = 59
+            if minutes == 0 and activePlayer != 2:
+                bg = RED
+            else:
+                minutes-=1
+                seconds = 59
         else:
             seconds-=1
-    
-    
     if activePlayer == 0:
         minute0 = minutes
         second0 = seconds
@@ -85,8 +78,42 @@ while not done:
 
 
 
-    screen.fill(WHITE)
-    DrawTimer(minute0, second0, minute1, second1)
+    screen.fill(bg)
+
+
+
+    if second0 == 0:
+        extra0 = 0
+        extras0 = ""
+    elif second0 < 10:
+        extras0 = 0
+    else:
+        extra0 = ""
+        extras0 = ""
+    if second1 == 0:
+        extra1 = 0
+        extras1 = ""
+    elif second1 < 10:
+        extras1 = 0
+    else:
+        extra1 = ""
+        extras1 = ""
+
+
+    if activePlayer == 0:
+        pg.draw.circle(screen, RED, (360, 300), (50))
+    elif activePlayer == 1:
+        pg.draw.circle(screen, RED, (1145, 300), (50))
+        
+    val0 = f'{str(minute0)}:{str(extras0)}{str(second0)}{extra0}'
+    val1 = f'{str(minute1)}:{str(extras1)}{str(second1)}{extra1}'
+    temp0 = font.render(str(val0), True, BLACK)
+    temp1 = font.render(str(val1), True, BLACK) 
+    screen.blit(temp0, (15, 450))
+    screen.blit(temp1, (800, 450)) 
+
+
+
     pg.display.flip()
     pg.display.update()
     clock.tick(60)
